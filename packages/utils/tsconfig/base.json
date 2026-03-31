@@ -13,6 +13,7 @@
     "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "noUncheckedSideEffectImports": true,
-    "erasableSyntaxOnly": true
+    "erasableSyntaxOnly": true,
+    "types": ["node"]
   }
 }
