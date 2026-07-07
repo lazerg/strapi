@@ -44,7 +44,7 @@ describe('resolveDevelopmentConfig (Vite admin dev)', () => {
       overlay: false,
       server: mockHttpServer,
     });
-    expect((config.server?.hmr as { clientPort?: number }).clientPort).toBeUndefined();
+    expect((config.server?.hmr as { clientPort?: number } | undefined)?.clientPort).toBeUndefined();
 
     await new Promise<void>((resolve) => {
       mockHttpServer.close(() => resolve());
