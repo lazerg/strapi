@@ -78,7 +78,7 @@ class Database {
       settings: {
         forceMigration: true,
         runMigrations: true,
-        ...(config.settings ?? {}),
+        ...config.settings,
       },
     };
 
