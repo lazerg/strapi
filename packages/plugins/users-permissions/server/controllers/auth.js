@@ -462,7 +462,7 @@ module.exports = ({ strapi }) => ({
         await validateCallback(customCallback, grantConfig[provider]);
 
         grantConfig[provider].callback = customCallback;
-      } catch (e) {
+      } catch {
         throw new ValidationError('Invalid callback URL provided', { callback: customCallback });
       }
     }

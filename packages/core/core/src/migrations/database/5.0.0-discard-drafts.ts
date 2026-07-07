@@ -363,7 +363,7 @@ async function copyMorphRowsByIdMap({
       if (originalId == null) continue;
       const newId = idMap.get(originalId);
       if (newId == null) continue;
-      const { id, ...rest } = row;
+      const { id: _id, ...rest } = row;
       toInsert.push({ ...rest, [columnToRewrite]: newId });
     }
     if (toInsert.length > 0) {
@@ -413,7 +413,7 @@ async function copyMorphRowsByPairs({
       if (originalId == null) continue;
       const draftIds = pairs.filter((p) => p.originalId === originalId).map((p) => p.draftId);
       for (const draftId of draftIds) {
-        const { id, ...rest } = row;
+        const { id: _id, ...rest } = row;
         toInsert.push({ ...rest, [columnToRewrite]: draftId });
       }
     }
@@ -1783,7 +1783,7 @@ async function cloneComponentInstance({
   if (supportsReturning(trx)) {
     try {
       insertResult = await trx(componentTableName).insert(newComponentRow, ['id']);
-    } catch (error: any) {
+    } catch {
       insertResult = await trx(componentTableName).insert(newComponentRow);
     }
   } else {
@@ -1875,7 +1875,7 @@ async function cloneComponentInstance({
             isForDraftEntity,
             reverseMapCache,
           });
-          const { id, ...rest } = row;
+          const { id: _id, ...rest } = row;
           await insertRowWithDuplicateHandling(trx, nestedJoinTableName, {
             ...rest,
             [entityIdCol]: newComponentId,
@@ -1904,7 +1904,7 @@ async function cloneComponentInstance({
             isForDraftEntity,
             reverseMapCache,
           });
-          const { id, ...rest } = row;
+          const { id: _id, ...rest } = row;
           await insertRowWithDuplicateHandling(trx, dzJoinTableName, {
             ...rest,
             [entityIdCol]: newComponentId,
@@ -2088,7 +2088,7 @@ async function copyRelationsForContentType({
           }
 
           // Create new relation object without the 'id' field
-          const { id, ...relationWithoutId } = relation;
+          const { id: _id, ...relationWithoutId } = relation;
           return {
             ...relationWithoutId,
             [sourceColumnName]: newSourceId,
@@ -2237,7 +2237,7 @@ async function copyRelationsFromOtherContentTypes({
 
           existingKeys.add(key);
 
-          const { id, ...relationWithoutId } = relation;
+          const { id: _id, ...relationWithoutId } = relation;
           newRelations.push({
             ...relationWithoutId,
             [targetColumnName]: newTargetId,
@@ -2365,7 +2365,7 @@ async function copyRelationsToOtherContentTypes({
           }
 
           // Create new relation object without the 'id' field
-          const { id, ...relationWithoutId } = relation;
+          const { id: _id, ...relationWithoutId } = relation;
           return {
             ...relationWithoutId,
             [sourceColumnName]: newSourceId,
@@ -3287,7 +3287,7 @@ async function copyComponentRelations({
             cloneMap.set(componentKey, newComponentId);
           }
 
-          const { id, ...relationWithoutId } = relation;
+          const { id: _id, ...relationWithoutId } = relation;
           return {
             ...relationWithoutId,
             [entityIdColumn]: newEntityId,

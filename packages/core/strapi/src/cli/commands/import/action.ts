@@ -154,7 +154,7 @@ export default async (opts: CmdOptions) => {
     try {
       const table = buildTransferTable(results.engine);
       console.log(table?.toString());
-    } catch (e) {
+    } catch {
       console.error('There was an error displaying the results of the transfer.');
     }
 
@@ -166,7 +166,7 @@ export default async (opts: CmdOptions) => {
     await strapiInstance.destroy();
 
     exitWith(0, exitMessageText('import'));
-  } catch (e) {
+  } catch {
     await strapiInstance.telemetry.send('didDEITSProcessFail', getTransferTelemetryPayload(engine));
     exitWith(1, exitMessageText('import', true));
   }

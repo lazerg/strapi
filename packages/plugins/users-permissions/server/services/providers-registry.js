@@ -41,7 +41,7 @@ const getCognitoPayload = async ({ idToken, jwksUrl, purest }) => {
       });
     });
     return decodedToken;
-  } catch (err) {
+  } catch {
     throw new Error('There was an error verifying the token');
   }
 };
